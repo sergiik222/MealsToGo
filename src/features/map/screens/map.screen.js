@@ -5,6 +5,7 @@ import { Search } from "../components/search.component";
 import { LocationContext } from "../../../services/location/location.context";
 import { RestaurantsContext } from "../../../services/restaurants/restaurants.context";
 import { MapCallout } from "../components/map-callout.component";
+import { Marker, Callout } from "react-native-maps";
 
 const Map = styled(MapView)`
   height: 100%;
@@ -37,7 +38,7 @@ const RestaurantMap = ({ navigation }) => {
       >
         {restaurants.map((restaurant) => {
           return (
-            <MapView.Marker
+            <Marker
               key={restaurant.name}
               title={restaurant.name}
               coordinate={{
@@ -45,7 +46,7 @@ const RestaurantMap = ({ navigation }) => {
                 latitude: restaurant.geometry.location.lat,
               }}
             >
-              <MapView.Callout
+              <Callout
                 onPress={() =>
                   navigation.navigate("RestaurantDetail", {
                     restaurant: restaurant,
@@ -53,8 +54,8 @@ const RestaurantMap = ({ navigation }) => {
                 }
               >
                 <MapCallout restaurant={restaurant} />
-              </MapView.Callout>
-            </MapView.Marker>
+              </Callout>
+            </Marker>
           );
         })}
       </Map>
